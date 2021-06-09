@@ -16,3 +16,12 @@
 
  @import "font-awesome";
  @import "bootstrap";
+
+.home-bg{
+    background-image: url("https://cdn.pixabay.com/photo/2016/01/19/17/57/car-1149997__340.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: .9 ;
+}
