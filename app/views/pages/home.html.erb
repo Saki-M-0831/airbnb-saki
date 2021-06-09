@@ -1,3 +1,29 @@
-<section class="text-center mx-5 mt-5">
-    <h1>Experience Any Places Like a Local</h1>
+<section class="comntainer text-center mx-5 mt-5 ">
+    <div class="row home-bg mx-5 my-5">
+        <div class="col-6 mx-auto py-5 my-5">
+            <h2 class="text-white">Experience Any Place Like a Local</h2>
+            <%= form_for :search do |f| %>
+                <%= f.text_field :destination, placeholder: "Where are you going?", class: "form-control text-center" %>
+
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <%= f.text_field :checkin_date, placeholder: "Check In", class: "form-control text-center" %>
+                    </div>
+                    <div class="col-6">
+                        <%= f.text_field :checkout_date, placeholder: "Check Out", class: "form-control text-center" %>
+                    </div>
+                </div>
+                <%= f.submit "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
+            <% end %>
+        </div>
+    </div>   
 </section>
+<section class="container">
+    <h2>Accommodations</h2>
+    <hr>
+</section>
+<section class="container">
+    <h2>Locations</h2>
+    <hr>
+</section>
+
