@@ -27,3 +27,6 @@
 /config/master.key
 
 /data
+**/.DS_Store
+*.DS_Store
+.DS_Store
