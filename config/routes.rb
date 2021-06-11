@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/about', to: "pages#about"
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
 end
