@@ -18,30 +18,53 @@
         </div>
     </div>   
 </section>
-<section class="container">
+<section class="container mb-5">
     <h2>Accommodations</h2>
     <hr>
+    <div class="row">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <%= link_to root_path, class:"hover" do %>
+                        <%= image_tag "https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287__480.jpg", class: "w-100 text-center" %>
+                    <% end %><br>
+                    <h4 class="my-2"><%= link_to "Incredible Place", root_path, class: "text-dark" %></h4>
+                    <p class="text-muted mb-0">
+                        $ 600<br>
+                        House<br>
+                        5 Bedrooms<br>
+                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart"></i><br>
+                        0 Reviews
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <section class="container">
-    <h2>Locations</h2>
+    <h2>Cities</h2>
     <hr>
     <div class="row text-center">
-        <div class="col-3 paris-bg py-5">
+        <div class="col-3 paris-bg py-5 hover">
             <br><br><br><br>
             <h3><%= link_to "Paris", root_path, class: "text-white p-5" %></h3>
             <br><br><br><br>
         </div>
-        <div class="col-3 amsterdam-bg py-5">
+        <div class="col-3 amsterdam-bg py-5 hover">
             <br><br><br><br>
             <h3><%= link_to "Amsterdam", root_path, class: "text-white p-5" %></h3>
             <br><br><br><br>
         </div>
-        <div class="col-3 chicago-bg py-5">
+        <div class="col-3 chicago-bg py-5 hover">
             <br><br><br><br>
             <h3><%= link_to "Chicago", root_path, class: "text-white p-5" %></h3>
             <br><br><br><br>
         </div>
-        <div class="col-3 tokyo-bg py-5">
+        <div class="col-3 tokyo-bg py-5 hover">
             <br><br><br><br>
             <h3><%= link_to "Tokyo", root_path, class: "text-white p-5" %></h3>
             <br><br><br><br>
