@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_06_11_083405) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "picture"
+    t.string "image"
     t.string "name"
     t.string "email", default: "", null: false
     t.string "phone"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_083405) do
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
-    t.string "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
