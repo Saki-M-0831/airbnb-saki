@@ -1,0 +1,38 @@
+<section class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="my-0">Share your space</h4>
+        </div>
+        <div class="card-body p-5">
+            <%= form_for :accommodation do |f| %>
+                <div class="row">
+                    <div class="col-4">
+                        <%= f.label :home_type, "Home Type" %>
+                        <%= f.select :home_type, {'Apartment': 1, 'House': 2, 'Bed & Breakfast': 3}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.label :room_type, "Room Type" %>
+                        <%= f.select :room_type, {'Entire': 1, 'Private': 2, 'Shared': 3}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.label :accommodate, "Accommodate" %>
+                        <%= f.select :accommodate, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <%= f.label :bedroom_count, "Bedroom" %>
+                        <%= f.select :bedroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.label :bathroom_count, "Bathroom" %>
+                        <%= f.select :bathroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <%= f.submit "Create", class: "btn btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</section>
