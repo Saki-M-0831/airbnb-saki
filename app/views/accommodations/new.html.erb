@@ -8,11 +8,11 @@
                 <div class="row">
                     <div class="col-4">
                         <%= f.label :home_type, "Home Type" %>
-                        <%= f.select :home_type, {'Apartment': 1, 'House': 2, 'Bed & Breakfast': 3}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                        <%= f.select :home_type, {'Apartment': "apartment", 'House': "house", 'Bed & Breakfast': "bed&breakdast"}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
                     </div>
                     <div class="col-4">
                         <%= f.label :room_type, "Room Type" %>
-                        <%= f.select :room_type, {'Entire': 1, 'Private': 2, 'Shared': 3}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
+                        <%= f.select :room_type, {'Entire': "entire", 'Private': "private", 'Shared': "shared"}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
                     </div>
                     <div class="col-4">
                         <%= f.label :accommodate, "Accommodate" %>
