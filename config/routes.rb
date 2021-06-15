@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
+  resources :accommodations
 end
