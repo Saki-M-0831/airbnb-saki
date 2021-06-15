@@ -1,2 +1,146 @@
-<h1>Accommodations#edit</h1>
-<p>Find me in app/views/accommodations/edit.html.erb</p>
+<section class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card px-5">
+                <div class="card-body my-0 pb-0 px-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Listing", edit_accommodation_path(@accommodation, accommo_set: "Listing"),  class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body my-0 p-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Price", edit_accommodation_path(@accommodation, accommo_set: "Price"), class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body my-0 p-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Description", edit_accommodation_path(@accommodation, accommo_set: "Description"), class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body my-0 p-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Photos", edit_accommodation_path(@accommodation, accommo_set: "Photos"), class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body my-0 p-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Amenities", edit_accommodation_path(@accommodation, accommo_set: "Amenities"), class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body my-0 p-0">
+                    <div class="row">
+                        <div class="col-9">
+                            <%= link_to "Locations", edit_accommodation_path(@accommodation, accommo_set: "Locations"), class: "text-dark font-weight-bold" %>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="card-body my-0 pt-0">
+                    <%= link_to "Update", edit_accommodation_path(@accommodation), class: "btn btn-outline-success px-4" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="my-0">
+                        <% if @edit_param.nil? %>
+                            Listing
+                        <% else %>
+                            <%= @edit_param %>
+                        <% end %>
+                    </h4>
+                </div>
+                <div class="card-body"> 
+                    <% if @edit_param == "Listing" || @edit_param.nil? %>
+                        <%= render "listing_form", btn_name: "Save" %>
+                    <% elsif @edit_param == "Photos" %>
+                        <%= form_for :photo do |f| %>
+                            <div class="px-3 text-center">
+                                <%= f.file_field :picture, class: "form-control" %>
+                            </div>
+                            <div class="col-3 text-center mx-auto mt-3">
+                                <%= f.submit "Save", class: "btn btn-primary px-4" %>
+                            </div>
+                        <% end %>
+                    <% else %>
+                        <%= form_for @accommodation do |f| %>
+                            <div class="px-3">
+                                <% if @edit_param == "Price" %>
+                                    <%= f.label :price, "Price (USD)" %><br>
+                                    <%= f.text_field :price, placeholder: "Ex.100", class: "form-control" %>
+                                <% elsif @edit_param == "Description" %>
+                                    <%= f.label :name, "Listing Name" %><br>
+                                    <%= f.text_field :name, placeholder: "Put Name Here", class: "form-control mb-1" %><br>
+
+                                    <%= f.label :summary, "Summary" %><br>
+                                    <%= f.text_area :summary, placeholder: "Put Summary Here", class: "form-control" %>
+                                <% elsif @edit_param == "Amenities" %>
+                                    <div class="row mt-4">
+                                        <div class="col-4">
+                                            <%= f.check_box :has_tv %>
+                                            <%= f.label :has_tv, "TV" %>
+                                        </div>
+                                        <div class="col-4">
+                                            <%= f.check_box :has_kitchen %>
+                                            <%= f.label :has_kitchen, "Kitchen" %>
+                                        </div>
+                                        <div class="col-4">
+                                            <%= f.check_box :has_internet %>
+                                            <%= f.label :has_internet, "Internet Connection" %>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <%= f.check_box :has_heating %>
+                                            <%= f.label :has_heating, "Heating" %>
+                                        </div>
+                                        <div class="col-4">
+                                            <%= f.check_box :has_ac %>
+                                            <%= f.label :has_ac, "Air Conditioner" %>
+                                        </div>
+                                    </div>
+                                <% elsif @edit_param == "Locations" %>
+                                    <%= f.label :location, "Address" %><br>
+                                    <%= f.text_field :location, placeholder: "Ex. Shinjyuku-ku, Tokyo, Japan", class: "form-control" %>
+                                <% end %>
+                            </div>
+                            <div class="col-3 text-center mx-auto mt-3">
+                                <%= f.submit "Save", class: "btn btn-primary px-4" %>
+                            </div> 
+                        <% end %>  
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

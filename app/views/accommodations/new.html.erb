@@ -4,35 +4,7 @@
             <h4 class="my-0">Share your space</h4>
         </div>
         <div class="card-body p-5">
-            <%= form_for @accommodation do |f| %>
-                <div class="row">
-                    <div class="col-4">
-                        <%= f.label :home_type, "Home Type" %>
-                        <%= f.select :home_type, {'Apartment': "apartment", 'House': "house", 'Bed & Breakfast': "bed&breakdast"}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
-                    </div>
-                    <div class="col-4">
-                        <%= f.label :room_type, "Room Type" %>
-                        <%= f.select :room_type, {'Entire': "entire", 'Private': "private", 'Shared': "shared"}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
-                    </div>
-                    <div class="col-4">
-                        <%= f.label :accommodate, "Accommodate" %>
-                        <%= f.select :accommodate, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-4">
-                        <%= f.label :bedroom_count, "Bedroom" %>
-                        <%= f.select :bedroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
-                    </div>
-                    <div class="col-4">
-                        <%= f.label :bathroom_count, "Bathroom" %>
-                        <%= f.select :bathroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control", required: true  %>
-                    </div>
-                </div>
-                <div class="text-center mt-4">
-                    <%= f.submit "Create", class: "btn btn-primary" %>
-                </div>
-            <% end %>
+            <%= render "listing_form", btn_name: "Create" %>
         </div>
     </div>
 </section>

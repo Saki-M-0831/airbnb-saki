@@ -13,6 +13,8 @@ class AccommodationsController < ApplicationController
   end
 
   def edit
+    @accommodation = Accommodation.find(params[:id])
+    @edit_param = params[:accommo_set]
   end
 
   def index
