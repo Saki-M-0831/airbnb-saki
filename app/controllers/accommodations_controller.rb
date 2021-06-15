@@ -1,5 +1,7 @@
 class AccommodationsController < ApplicationController
   def new
+    before_action :require_login
+
     @accommodation = Accommodation.new
   end
 
@@ -19,6 +21,14 @@ class AccommodationsController < ApplicationController
 
   def index
     @accommodations = current_user.accommodations.paginate(page: params[:page], per_page: 5)
+  end
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must login to have the access to this section"
+
+      redirect_to root_url 
+    end
   end
 
   private
