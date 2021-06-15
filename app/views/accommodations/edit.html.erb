@@ -18,7 +18,9 @@
                             <%= link_to "Price", edit_accommodation_path(@accommodation, accommo_set: "Price"), class: "text-dark font-weight-bold" %>
                         </div>
                         <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
+                            <% if !@accommodation.price.nil? %>
+                                <i class="fa fa-check-circle"></i>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -28,7 +30,9 @@
                             <%= link_to "Description", edit_accommodation_path(@accommodation, accommo_set: "Description"), class: "text-dark font-weight-bold" %>
                         </div>
                         <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
+                            <% if !@accommodation.summary.nil? %>
+                                <i class="fa fa-check-circle"></i>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -38,7 +42,9 @@
                             <%= link_to "Photos", edit_accommodation_path(@accommodation, accommo_set: "Photos"), class: "text-dark font-weight-bold" %>
                         </div>
                         <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
+                            <%# if !@accommodation.photos.nil? %>
+                                <i class="fa fa-check-circle"></i>
+                            <%# end %>
                         </div>
                     </div>
                 </div>
@@ -48,7 +54,9 @@
                             <%= link_to "Amenities", edit_accommodation_path(@accommodation, accommo_set: "Amenities"), class: "text-dark font-weight-bold" %>
                         </div>
                         <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
+                            <% if !@accommodation.has_tv.nil? %>
+                                <i class="fa fa-check-circle"></i>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -58,7 +66,9 @@
                             <%= link_to "Locations", edit_accommodation_path(@accommodation, accommo_set: "Locations"), class: "text-dark font-weight-bold" %>
                         </div>
                         <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
+                            <% if !@accommodation.location.nil? %>
+                                <i class="fa fa-check-circle"></i>
+                            <% end %>
                         </div>
                     </div>
                 </div>
