@@ -1,2 +1,55 @@
-<h1>Accommodations#index</h1>
-<p>Find me in app/views/accommodations/index.html.erb</p>
+<section class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card text-center">
+                <div class="card-body my-0 pb-0">
+                    <%= link_to "Manage your listing", accommodations_path, class: "text-dark font-weight-bold" %>
+                </div>
+                <hr>
+                <div class="card-body my-0 py-0">
+                    <%= link_to "Manage your listing", accommodations_path, class: "text-dark font-weight-bold" %>
+                </div>
+                <hr>
+                <div class="card-body my-0 pt-0 ">
+                    <%= link_to "Manage your listing", accommodations_path, class: "text-dark font-weight-bold" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="my-0">Your Listing</h4>
+                </div>
+                <div class="card-body">
+                    <% if @accommodations.nil? %>
+                        <h3 class="text-muted">No Listings yet...</h3>
+                    <% else %>
+                        <% @accommodations.each do |accommo| %>
+                            <div class="row">
+                                <div class="col-3 text-center">
+                                    <%# if accommo.photos? %>
+                                        <%#= image_tag accommo.photos.first.url, class: "w-100" %>
+                                    <%# else %>
+                                        <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-75" %>
+                                    <%# end %>
+                                </div>
+                                <div class="col-3">
+                                    <%= accommo.name %>
+                                </div>
+                                <div class="col-3">
+                                    
+                                </div>
+                                <div class="col-3 text-center my-auto">
+                                    <%= link_to "Update", edit_accommodation_path(accommo), class: "btn btn-outline-success px-4" %>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                    <div class="mx-auto">
+                        <%= will_paginate @accommodations %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

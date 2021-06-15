@@ -16,6 +16,7 @@ class AccommodationsController < ApplicationController
   end
 
   def index
+    @accommodations = current_user.accommodations.paginate(page: params[:page], per_page: 5)
   end
 
   private
