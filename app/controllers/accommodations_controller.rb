@@ -4,7 +4,7 @@ class AccommodationsController < ApplicationController
   end
 
   def create
-    @accommodation = Accommodation.new(accommo_params)
+    @accommodation = current_user.accommodations.new(accommo_params)
     if @accommodation.save
       redirect_to root_url
     else
