@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   }
 
   resources :accommodations do
+    resources :photos, only: [:create, :destroy]
     member do
       get "listing"
       get "price"

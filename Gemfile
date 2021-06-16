@@ -80,3 +80,5 @@ gem 'toastr-rails'
 
 gem 'omniauth', '~> 1.6'
 gem 'omniauth-facebook', '~> 4.0'
+
+gem 'activestorage'

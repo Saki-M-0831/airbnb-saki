@@ -9,12 +9,27 @@
                     <h4 class="my-0">Photos</h4>
                 </div>
                 <div class="card-body"> 
-                    <%= form_for :photo do |f| %>
+                    <%= form_for @accommodation, url: photos_accommodation_path(@accommodation), method: "post", html: { :multipart => true }, enctype: 'multipart/form-data' do |f| %>
                         <div class="px-3 text-center">
-                            <%= f.file_field :picture, class: "form-control", required: true %>
+                            <%= file_field_tag "images[]", type: :file, multiple: true, required: true %>
                         </div>
                         <div class="col-3 text-center mx-auto mt-3">
                             <%= f.submit "Save", class: "btn btn-primary px-4" %>
+                        </div>
+                    <% end %>
+                    <% if @photos.any? %>
+                        <hr>
+                        <div class="row">
+                            <% @photos.each do |photo| %>
+                                <div class="col-4">
+                                    <div class="card text-right">
+                                        <%= image_tag photo.image, class: "w-100" %><br>
+                                        <%= link_to accommodation_photo_path(@accommodation, photo), method: :delete do %>
+                                            <div class="text-dark pr-3 pb-3"><i class="fa fa-trash fa-2x"></i></div>
+                                        <% end %>
+                                    </div> 
+                                </div>
+                            <% end %>
                         </div>
                     <% end %>
                 </div>
