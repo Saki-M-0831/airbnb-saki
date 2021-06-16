@@ -1,0 +1,66 @@
+<div class="card px-5">
+    <div class="card-body my-0 pb-0 px-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Listing", listing_accommodation_path(@accommodation),  class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <i class="fa fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Price", price_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%= is_done?(@accommodation.price) %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Description", description_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%= is_done?(@accommodation.summary) %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Photos", photos_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%#= is_done?(@accommodation.photos) %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Amenities", amenities_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%= is_done?(@accommodation.has_tv) %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Locations", locations_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%= is_done?(@accommodation.location) %>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body my-0 pt-0">
+        <%= link_to "Publish", root_path, class: "btn btn-outline-success px-4" %>
+    </div>
+</div>

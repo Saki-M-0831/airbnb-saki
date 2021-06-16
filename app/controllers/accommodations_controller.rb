@@ -1,4 +1,7 @@
 class AccommodationsController < ApplicationController
+  before_action :require_login
+  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations]
+
   def new
     @accommodation = Accommodation.new
   end
@@ -12,7 +15,22 @@ class AccommodationsController < ApplicationController
     end
   end
 
-  def edit
+  def listing 
+  end
+
+  def price 
+  end
+
+  def description 
+  end
+
+  def photos 
+  end
+
+  def amenities 
+  end
+
+  def locations 
   end
 
   def index
@@ -22,5 +40,9 @@ class AccommodationsController < ApplicationController
   private
   def accommo_params
     params.require(:accommodation).permit(:home_type, :room_typr, :accommodate, :bedroom_type, :bathroom_type, :price, :name, :summary, :has_tv, :has_kitchen, :has_internet, :has_heating, :has_ac, :location, :is_active)
+  end
+
+  def init_accommo
+    @accommodation = Accommodation.find(params[:id])
   end
 end
