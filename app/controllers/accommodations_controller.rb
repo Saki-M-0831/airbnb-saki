@@ -36,13 +36,10 @@ class AccommodationsController < ApplicationController
   def update
     if @accommodation.update(accommo_params)
       flash[:success] = "You successfully updated your accommodation details!!"
-
-      redirect_back(fallback_location: request.referer)
     else
-      flash[:danger] = "You failed to updated the detail, please try again."
-
-      redirect_back(fallback_location: request.referer) 
+      flash[:danger] = "You failed to updated the detail, please try again."  
     end
+    redirect_back(fallback_location: request.referer) 
   end
 
   def index
