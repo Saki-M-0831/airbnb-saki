@@ -15,9 +15,7 @@
                 <%= link_to "Price", price_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <% if !@accommodation.price.nil? %>
-                    <i class="fa fa-check-circle"></i>
-                <% end %>
+                <%= is_done?(@accommodation.price) %>
             </div>
         </div>
     </div>
@@ -27,9 +25,7 @@
                 <%= link_to "Description", description_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <% if !@accommodation.summary.nil? %>
-                    <i class="fa fa-check-circle"></i>
-                <% end %>
+                <%= is_done?(@accommodation.summary) %>
             </div>
         </div>
     </div>
@@ -39,9 +35,7 @@
                 <%= link_to "Photos", photos_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <%# if !@accommodation.photos.nil? %>
-                    <i class="fa fa-check-circle"></i>
-                <%# end %>
+                <%#= is_done?(@accommodation.photos) %>
             </div>
         </div>
     </div>
@@ -51,9 +45,7 @@
                 <%= link_to "Amenities", amenities_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <% if !@accommodation.has_tv.nil? %>
-                    <i class="fa fa-check-circle"></i>
-                <% end %>
+                <%= is_done?(@accommodation.has_tv) %>
             </div>
         </div>
     </div>
@@ -63,9 +55,7 @@
                 <%= link_to "Locations", locations_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <% if !@accommodation.location.nil? %>
-                    <i class="fa fa-check-circle"></i>
-                <% end %>
+                <%= is_done?(@accommodation.location) %>
             </div>
         </div>
     </div>
