@@ -1,0 +1,76 @@
+<div class="card px-5">
+    <div class="card-body my-0 pb-0 px-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Listing", listing_accommodation_path(@accommodation),  class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <i class="fa fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Price", price_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <% if !@accommodation.price.nil? %>
+                    <i class="fa fa-check-circle"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Description", description_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <% if !@accommodation.summary.nil? %>
+                    <i class="fa fa-check-circle"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Photos", photos_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <%# if !@accommodation.photos.nil? %>
+                    <i class="fa fa-check-circle"></i>
+                <%# end %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Amenities", amenities_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <% if !@accommodation.has_tv.nil? %>
+                    <i class="fa fa-check-circle"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="card-body my-0 p-0">
+        <div class="row">
+            <div class="col-9">
+                <%= link_to "Locations", locations_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
+            </div>
+            <div class="col-3">
+                <% if !@accommodation.location.nil? %>
+                    <i class="fa fa-check-circle"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card-body my-0 pt-0">
+        <%= link_to "Publish", root_path, class: "btn btn-outline-success px-4" %>
+    </div>
+</div>

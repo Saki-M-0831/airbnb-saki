@@ -8,5 +8,14 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :accommodations
+  resources :accommodations do
+    member do
+      get "listing"
+      get "price"
+      get "description"
+      get "photos"
+      get "amenities"
+      get "locations"
+    end
+  end
 end

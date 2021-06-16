@@ -1,0 +1,25 @@
+<section class="container">
+    <div class="row">
+        <div class="col-3">
+            <%= render "sidebar" %>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="my-0">Locations</h4>
+                </div>
+                <div class="card-body"> 
+                    <%= form_for @accommodation do |f| %>
+                        <div class="px-3">
+                            <%= f.label :location, "Address" %><br>
+                            <%= f.text_field :location, placeholder: "Ex. Shinjyuku-ku, Tokyo, Japan", class: "form-control" %>
+                        </div>
+                        <div class="col-3 text-center mx-auto mt-3">
+                            <%= f.submit "Save", class: "btn btn-primary px-4" %>
+                        </div> 
+                    <% end %>  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

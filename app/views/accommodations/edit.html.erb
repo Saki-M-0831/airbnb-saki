@@ -1,82 +1,7 @@
 <section class="container">
     <div class="row">
         <div class="col-3">
-            <div class="card px-5">
-                <div class="card-body my-0 pb-0 px-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Listing", edit_accommodation_path(@accommodation, accommo_set: "Listing"),  class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <i class="fa fa-check-circle"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body my-0 p-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Price", edit_accommodation_path(@accommodation, accommo_set: "Price"), class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <% if !@accommodation.price.nil? %>
-                                <i class="fa fa-check-circle"></i>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body my-0 p-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Description", edit_accommodation_path(@accommodation, accommo_set: "Description"), class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <% if !@accommodation.summary.nil? %>
-                                <i class="fa fa-check-circle"></i>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body my-0 p-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Photos", edit_accommodation_path(@accommodation, accommo_set: "Photos"), class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <%# if !@accommodation.photos.nil? %>
-                                <i class="fa fa-check-circle"></i>
-                            <%# end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body my-0 p-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Amenities", edit_accommodation_path(@accommodation, accommo_set: "Amenities"), class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <% if !@accommodation.has_tv.nil? %>
-                                <i class="fa fa-check-circle"></i>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body my-0 p-0">
-                    <div class="row">
-                        <div class="col-9">
-                            <%= link_to "Locations", edit_accommodation_path(@accommodation, accommo_set: "Locations"), class: "text-dark font-weight-bold" %>
-                        </div>
-                        <div class="col-3">
-                            <% if !@accommodation.location.nil? %>
-                                <i class="fa fa-check-circle"></i>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="card-body my-0 pt-0">
-                    <%= link_to "Update", edit_accommodation_path(@accommodation), class: "btn btn-outline-success px-4" %>
-                </div>
-            </div>
+            <%= render "sidebar" %>
         </div>
         <div class="col-9">
             <div class="card">
@@ -153,4 +78,3 @@
         </div>
     </div>
 </section>
-
