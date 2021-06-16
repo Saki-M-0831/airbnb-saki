@@ -12,7 +12,7 @@
                     <%= form_for @accommodation do |f| %>
                         <div class="px-3">
                             <%= f.label :location, "Address" %><br>
-                            <%= f.text_field :location, placeholder: "Ex. Shinjyuku-ku, Tokyo, Japan", class: "form-control" %>
+                            <%= f.text_field :location, placeholder: "Ex. Shinjyuku-ku, Tokyo, Japan", class: "form-control", required: true %>
                         </div>
                         <div class="col-3 text-center mx-auto mt-3">
                             <%= f.submit "Save", class: "btn btn-primary px-4" %>
