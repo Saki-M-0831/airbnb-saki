@@ -1,6 +1,6 @@
 class AccommodationsController < ApplicationController
   before_action :require_login
-  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations]
+  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update]
 
   def new
     @accommodation = Accommodation.new
@@ -31,6 +31,12 @@ class AccommodationsController < ApplicationController
   end
 
   def locations 
+  end
+
+  def update
+    if @accommodation.update(accommo_params)
+      redirect_back(fallback_location: request.referer)
+    end
   end
 
   def index
