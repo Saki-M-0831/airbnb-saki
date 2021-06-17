@@ -27,7 +27,7 @@
                         <% @accommodations.each do |accommo| %>
                             <div class="row mb-2">
                                 <div class="col-3 text-center">
-                                    <%= link_to root_path do %>
+                                    <%= link_to accommodation_path(accommo) do %>
                                         <% if accommo.photos.any? %>
                                             <%= image_tag accommo.photos.first.image, class: "w-100 hover" %>
                                         <% else %>
@@ -39,7 +39,7 @@
                                     <% if accommo.name.nil? %>
                                         <p class="text-muted">ADD INFO HERE...</p>
                                     <% else %>
-                                        <h4 class="mb-0"><%= link_to accommo.name, root_path, class:"text-dark" %></h4>
+                                        <h4 class="mb-0"><%= link_to accommo.name, accommodation_path(accommo), class:"text-dark" %></h4>
                                         <i class="fa fa-map-pin"></i> <%= accommo.location %><br><br>
                                         <%= accommo.summary %>
                                     <% end %>

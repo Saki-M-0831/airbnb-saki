@@ -1,6 +1,6 @@
 class AccommodationsController < ApplicationController
   before_action :require_login
-  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update]
+  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update, :show]
 
   def new
     @accommodation = Accommodation.new
@@ -45,6 +45,10 @@ class AccommodationsController < ApplicationController
 
   def index
     @accommodations = current_user.accommodations.paginate(page: params[:page], per_page: 5)
+  end
+
+  def show
+    @photos = @accommodation.photos
   end
 
   private
