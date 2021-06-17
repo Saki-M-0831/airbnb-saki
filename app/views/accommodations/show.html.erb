@@ -10,7 +10,7 @@
                 <div class="col-3 text-center">
                     <%= link_to root_path do %>
                         <% if @accommodation.user.image? %>
-                            <%= image_tag @accommodation.user_id.image, :size => "80x80" %>
+                            <%= image_tag @accommodation.user.image, :size => "80x80" %>
                         <% else %>
                             <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", :size => "80x80" %>
                         <% end %>
@@ -73,14 +73,15 @@
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <% @accommodation.photos.each do |photo|%>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="<%= photo.id %>"></li>
+                    <% end %>
                 </ol>
                 <div class="carousel-inner">
                     <% @photos.each do |photo| %>
-                    <div class="carousel-item active">
-                        <%= image_tag photo.image, class: "d-block w-100" %>
-                    </div>
+                        <div class="carousel-item <%= photo.id == @accommodation.photos.first.id ? 'active' : '' %>">
+                            <%= image_tag photo.image, class: "d-block w-100" %>
+                        </div>
                     <% end %>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
