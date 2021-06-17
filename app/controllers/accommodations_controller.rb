@@ -49,7 +49,7 @@ class AccommodationsController < ApplicationController
 
   private
   def accommo_params
-    params.require(:accommodation).permit(:home_type, :room_typr, :accommodate, :bedroom_type, :bathroom_type, :price, :name, :summary, :has_tv, :has_kitchen, :has_internet, :has_heating, :has_ac, :location, :is_active)
+    params.require(:accommodation).permit(:home_type, :room_type, :accommodate, :bedroom_count, :bathroom_count, :price, :name, :summary, :has_tv, :has_kitchen, :has_internet, :has_heating, :has_ac, :location, :is_active)
   end
 
   def init_accommo
