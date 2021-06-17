@@ -63,9 +63,12 @@
     </div>
     <hr>
     <div class="card-body my-0 pt-0 text-center">
-        <%= link_to "Publish", accommodations_path, class: "btn btn-outline-success px-4" %>
+        <%= form_for @accommodation do |f| %>
+            <%= f.hidden_field :is_active, value: true %>
+            <%= f.submit "Publish", disabled: !is_ready?(@accommodation), class: "btn btn-outline-success px-4" %>
+        <% end %>
     </div>
 </div>
 <div class="text-center mt-3">
-    <%= link_to "Back", :back %>
+    <%= link_to "Back", accommodations_path %>
 </div>
