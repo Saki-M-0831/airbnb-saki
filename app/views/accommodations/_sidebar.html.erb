@@ -35,7 +35,9 @@
                 <%= link_to "Photos", photos_accommodation_path(@accommodation), class: "text-dark font-weight-bold" %>
             </div>
             <div class="col-3">
-                <%#= is_done?(@accommodation.photos) %>
+                <% if @accommodation.photos.any? %>
+                    <i class="fa fa-check-circle"></i>
+                <% end %>
             </div>
         </div>
     </div>
@@ -60,7 +62,10 @@
         </div>
     </div>
     <hr>
-    <div class="card-body my-0 pt-0">
+    <div class="card-body my-0 pt-0 text-center">
         <%= link_to "Publish", accommodations_path, class: "btn btn-outline-success px-4" %>
     </div>
+</div>
+<div class="text-center mt-3">
+    <%= link_to "Back", :back %>
 </div>

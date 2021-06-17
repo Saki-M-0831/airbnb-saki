@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     unless !current_user.nil?
       flash[:error] = "You must login to have the access to this section"
 
-      redirect_to root_url 
+      redirect_to new_user_session_url 
     end
   end
 
