@@ -72,7 +72,6 @@
             <hr>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <% @accommodation.photos.each do |photo|%>
                         <li data-target="#carouselExampleIndicators" data-slide-to="<%= photo.id %>"></li>
                     <% end %>
@@ -94,9 +93,31 @@
                 </a>
             </div>
             <hr>
-            <div class="">
-                add map here
-            </div>
+            <div id="map"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ljqecHowghf4-EaCSIRBNeWk4Iv4bZ4"></script>
+            <script>
+                function initialize() {
+                    var location = {lat: Number("<%= @accommodation.latitude %>"), lng: Number("<%= @accommodation.longitude %>")};
+
+                    var map = new google.maps.Map(document.getElementById('map'),{
+                        center: location,
+                        zoom: 14
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: '<div id="content"><%= image_tag @accommodation.photos.first.image, :size => "250x200" %></div>'
+                    });
+
+                    infoWindow.open(map, marker);
+                }
+
+                google.maps.event.addDomListener(window,'load', initialize);
+            </script>
             <hr>
             <h3>Places Nearby</h3>
             <p>No places near by...</p>
