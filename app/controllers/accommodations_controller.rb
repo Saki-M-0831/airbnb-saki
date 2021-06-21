@@ -1,6 +1,6 @@
 class AccommodationsController < ApplicationController
   before_action :require_login
-  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update, :show]
+  before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update, :show, :preload, :preview]
 
   def new
     @accommodation = Accommodation.new
@@ -49,6 +49,31 @@ class AccommodationsController < ApplicationController
 
   def show
     @photos = @accommodation.photos
+    @booking = Booking.new
+  end
+
+  def preload
+    today = Date.today
+    bookings = @accommodation.bookings.where("check_in >= ? OR check_out >= ?", today, today)
+
+    render json: bookings
+  end
+
+  def preview
+    check_in = Date.parse(params[:check_in])
+    check_out = Date.parse(params[:check_out])
+
+    output = {
+      conflict: is_conflict(check_in, check_out, @accommodation)
+    }
+
+    render json: output
+  end
+
+  private
+  def is_conflict(check_in, check_out, accommodation)
+    check = accommodation.bookings.where("? < check_in AND check_out < ?", check_in, check_out)
+    check.size > 0 ? true : false
   end
 
   private

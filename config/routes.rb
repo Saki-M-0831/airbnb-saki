@@ -17,6 +17,10 @@ Rails.application.routes.draw do
       get "photos"
       get "amenities"
       get "locations"
+      get "preview"
+      get "preload"
     end
   end
+
+  resources :bookings, only: [:create, :destroy]
 end

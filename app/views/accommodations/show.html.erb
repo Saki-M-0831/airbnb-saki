@@ -135,19 +135,132 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <%= form_for :booking do |f| %>
+                    <%= form_for @booking do |f| %>
                         <div class="row">
                             <div class="col-6">
                                 <%= f.label :check_in, "Check In" %><br>
-                                <%= f.date_field :check_in, class: "form-control", require: true %>
+                                <%= f.text_field :check_in, id: "check_in", placeholder: "Checkin Date", class: "form-control", require: true, readonly: true %>
                             </div>
                             <div class="col-6">
                                 <%= f.label :check_out, "Check Out" %><br>
-                                <%= f.date_field :check_out, class: "form-control", require: true %>
+                                <%= f.text_field :check_out, id: "check_out", placeholder: "Checkout Date", class: "form-control", require: true, readonly: true, disabled: true %>
                             </div>
-                            <%= f.submit "Book Now", class: "btn btn-outline-primary btn-block mx-3 mt-3" %>
+                            <%= f.submit "Book Now", class: "btn btn-outline-primary btn-block mx-3 mt-3", id: "submit", disabled: true %>
                         </div>
                     <% end %>
+                    <p id="message" class="text-center"></p>
+                    <div id="preview" style="display: none;">
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">Price:</div>
+                            <div class="col-6 text-right">$<%= @accommodation.price %></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">Night(s):</div>
+                            <div class="col-6 text-right">x<span id="nights"></span></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-6">Total Price:</div>
+                            <div class="col-6 text-right">$<span id="totalprice"></span></div>
+                        </div>
+                    </div>
+                    <script>
+                        function checkDate(date){
+                            dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                            return [$.inArray(dmy, unavailableDates) == -1];
+                        }
+
+                        $(function(){
+                            unavailableDates = [];
+                            $.ajax({
+                                url: '<%= preload_accommodation_path(@accommodation) %>',
+                                dataType: 'json',
+                                success: function(data) {
+                                    $.each(data, function(arrID, arrValue){
+                                        for(var d = new Date(arrValue.check_in); d <= new Date (arrValue.check_out); d.setDate(d.getDate() + 1)) {
+                                            unavailableDates.push($.datepicker.formatDate('d-mm-yy', d));
+                                        }
+                                    });
+
+                                    $("#check_in").datepicker({
+                                        dateFormat: 'dd-mm-y',
+                                        minDate: 0,
+                                        maxDate: '3m',
+                                        beforeShowDay: checkDate,
+                                        onSelect: function(selected){
+                                            $("#check_out").datepicker("option", "minDate", selected);
+                                            $("#check_out").datepicker("disabled", false);
+
+                                            var check_in = $("#check_in").datepicker("getDate");
+                                            var check_out = $("#check_out").datepicker("getDate");
+                                            var nights = (check_out - check_in)/1000/60/60/24;
+
+                                            var input = {
+                                                "check_in": check_in,
+                                                "check_out": check_out
+                                            };
+
+                                            $.ajax({
+                                                url: "<%= preview_accommodation_path(@accommodation) %>",
+                                                data: input,
+                                                success: function(data){
+                                                    if (data.conflict) {
+                                                        $("#message").text("These dates are unavailable.");
+                                                        $("#preview").hide();
+                                                        $("#submit").attr("disabled", true);
+                                                    } else {
+                                                        $("#preview").show();
+                                                        $("#submit").attr("disabled", false);
+                                                        var total_price = <%= @accommodation.price %> * nights;
+                                                        $("#nights").text(nights);
+                                                        $("#totalprice").text(total_price);      
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    })
+                                    $("#check_out").datepicker({
+                                        dateFormat: 'dd-mm-y',
+                                        minDate: 0,
+                                        maxDate: '3m',
+                                        beforeShowDay: checkDate,
+                                        onSelect: function(selected){
+                                            $("#check_in").datepicker("option", "maxDate", selected);
+
+                                            var check_in = $("#check_in").datepicker("getDate");
+                                            var check_out = $("#check_out").datepicker("getDate");
+                                            var nights = (check_out - check_in)/1000/60/60/24;
+
+                                            var input = {
+                                                "check_in": check_in,
+                                                "check_out": check_out
+                                            };
+
+                                            $.ajax({
+                                                url: "<%= preview_accommodation_path(@accommodation) %>",
+                                                data: input,
+                                                success: function(data){
+                                                    if (data.conflict) {
+                                                        $("#message").text("These dates are unavailable.");
+                                                        $("preview").hide();
+                                                        $("#submit").attr("disabled", true);
+                                                    } else {
+                                                        $("#preview").show();
+                                                        $("#submit").attr("disabled", false);
+                                                        var total_price = <%= @accommodation.price %> * nights;
+                                                        $("#nights").text(nights);
+                                                        $("#totalprice").text(total_price);      
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    })
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </div>

@@ -18,7 +18,12 @@
         <div class="col-9">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="my-0">Your Listing</h4>
+                    <div class="row">
+                        <div class="col-6"><h4 class="my-0">Your Listing</h4></div>
+                        <div class="col-6 text-right">
+                            <%= link_to "Add New", new_accommodation_path, class: "btn btn-outline-dark nav-bg py-0" %>
+                        </div>
+                    </div>   
                 </div>
                 <div class="card-body">
                     <% if !@accommodations.any? %>
@@ -26,22 +31,32 @@
                     <% else %>
                         <% @accommodations.each do |accommo| %>
                             <div class="row mb-2">
-                                <div class="col-3 text-center">
-                                    <%= link_to accommodation_path(accommo) do %>
-                                        <% if accommo.photos.any? %>
+                                <div class="col-3 text-center my-auto">
+                                    <% if accommo.is_active == true %>
+                                        <small class="badge badge-pill nav-bg col-5 float-left mb-1">Published</small>
+                                        <%= link_to accommodation_path(accommo) do %>
                                             <%= image_tag accommo.photos.first.image, class: "w-100 hover" %>
+                                        <% end %>
+                                    <% else %>
+                                        <small class="badge badge-pill badge-secondary col-5 float-left mb-1 ">Creating</small>
+                                        <% if accommo.photos.any? %>
+                                            <%= image_tag accommo.photos.first.image, class: "w-100" %>
                                         <% else %>
-                                            <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-75 hover" %>
+                                            <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-75" %>
                                         <% end %>
                                     <% end %>
+                                    
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 my-auto">
                                     <% if accommo.name.nil? %>
                                         <p class="text-muted">ADD INFO HERE...</p>
                                     <% else %>
-                                        <h4 class="mb-0"><%= link_to accommo.name, accommodation_path(accommo), class:"text-dark" %></h4>
-                                        <i class="fa fa-map-pin"></i> <%= accommo.location %><br><br>
-                                        <%= accommo.summary %>
+                                        
+                                        <h4 class="mb-0">
+                                            <%= link_to accommo.name, accommodation_path(accommo), class:"text-dark" %>   
+                                        </h4>
+                                        <i class="fa fa-map-pin"></i> <%= accommo.location %><br>
+                                        <span class="text-muted"><%= accommo.summary %></span>
                                     <% end %>
                                 </div>
                                 <div class="col-3 text-center my-auto">
