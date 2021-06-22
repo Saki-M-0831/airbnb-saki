@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <%= link_to root_path, class: "navbar-brand text-primary ml-5" do %>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top nav-bg">
+    <%= link_to root_path, class: "navbar-brand text-primary ml-5 text-dark" do %>
         <i class="fa fa-home"></i> Airbnb-Saki
     <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,21 +8,21 @@
 
     <form class="form-inline mr-auto my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Your Destination" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
     </form>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto mr-5">
-            <li class="nav-item active mr-2">
-                <%= link_to "Become a Host", new_accommodation_path, class: "nav-link btn btn-outline-primary text-primary" %> 
+            <li class="nav-item active mr-2 my-auto">
+                <%= link_to "Become a Host", new_accommodation_path, class: "nav-link btn btn-outline-primary text-dark" %> 
             </li>
             <% if user_signed_in? %>
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <% if !current_user.image.nil? %>
-                            <%= image_tag current_user.image, :size => "30x30" %>
+                            <%= image_tag current_user.image, class: "rounded-circle", :size => "30x30" %>
                         <% else %>
-                            <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", :size => "30x30" %>
+                            <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle", :size => "30x30" %>
                         <% end %>
                         <%= current_user.name %>
                     </a>
