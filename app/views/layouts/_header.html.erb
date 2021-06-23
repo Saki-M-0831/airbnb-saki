@@ -29,8 +29,8 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <%= link_to "Manage Listing", accommodations_path, class: "dropdown-item" %>
                         <%= link_to "List Your Space", new_accommodation_path, class: "dropdown-item" %>
-                        <%= link_to "Your Reservations", root_path, class: "dropdown-item" %>
-                        <%= link_to "Your Trips", root_path, class: "dropdown-item" %>
+                        <%= link_to "Your Reservations", your_reservations_path, class: "dropdown-item" %>
+                        <%= link_to "Your Trips", your_trips_path, class: "dropdown-item" %>
                         <div class="dropdown-divider"></div>
                         <%= link_to "Edit Profile", root_path, class: "dropdown-item" %>
                         <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'pages#home'
   get '/about', to: "pages#about"
+  get '/your_reservations', to:'bookings#reservation'
+  get '/your_trips', to:'bookings#trip'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',

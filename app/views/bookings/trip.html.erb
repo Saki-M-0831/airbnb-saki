@@ -1,0 +1,87 @@
+<section class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card text-center">
+                <div class="card-body my-0 pb-0">
+                    <%= link_to "Your Listing", accommodations_path, class: "text-dark font-weight-bold" %>
+                </div>
+                <hr>
+                <div class="card-body my-0 py-0">
+                    <%= link_to "Your Reservations", your_reservations_path, class: "text-dark font-weight-bold" %>
+                </div>
+                <hr>
+                <div class="card-body my-0 pt-0 ">
+                    <%= link_to "Your Trips", your_trips_path, class: "text-dark font-weight-bold" %>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <%= link_to "Back", :back %>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6"><h4 class="my-0">Your Trips</h4></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <% if @bookings.nil? %>
+                        <p class="text-muted">There Is No Trips Yet</p>
+                    <% else %>
+                        <% @bookings.each do |book| %>
+                            <div class="row mx-3">
+                                <div class="col-3 my-auto">
+                                    <h5><%=link_to book.accommodation.name, accommodation_path(book.accommodation) %></h5>
+                                    <span class="font-weight-bold">Checkin Date: </span ><br><%= book.check_in %><br>
+                                    <span class="font-weight-bold">Checkout Date: </span><br><%= book.check_out %>
+                                </div>
+                                <div class="col-3 my-auto">
+                                    <%= image_tag book.accommodation.photos.first.image, class: "w-100" %>
+                                </div>
+                                <div class="col-3 my-auto">
+                                    <span class="font-weight-bold">Host: </span><br>
+                                    <% if !book.user.image.nil? %>
+                                        <%= image_tag book.accommodation.user.image, class: "rounded-circle", :size => "30x30" %>
+                                    <% else %>
+                                        <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle", :size => "30x30" %>
+                                    <% end %>
+                                    <%= link_to book.accommodation.user.name, root_path, class: "text-dark" %>
+                                </div>
+                                <div class="col-3 my-auto">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                        Review Host
+                                    </button>
+
+                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Review Host</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                                <%= form_for :review do |f| %>
+                                                    <div class="modal-body">
+                                                        <%=  %>
+                                                        <%= f.text_area :comment, class: "form-control", placeholder: "Leave some comments here!" %>
+                                                        <%= f.hidden_field :booking_id, value: book.id %>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <%= f.submit "Add Review", class: "mx-auto btn btn-primary" %>
+                                                    </div>   
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>    
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

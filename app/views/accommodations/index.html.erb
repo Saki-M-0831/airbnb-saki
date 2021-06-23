@@ -7,12 +7,15 @@
                 </div>
                 <hr>
                 <div class="card-body my-0 py-0">
-                    <%= link_to "Your Reservations", accommodations_path, class: "text-dark font-weight-bold" %>
+                    <%= link_to "Your Reservations", your_reservations_path, class: "text-dark font-weight-bold" %>
                 </div>
                 <hr>
                 <div class="card-body my-0 pt-0 ">
-                    <%= link_to "Your Trips", accommodations_path, class: "text-dark font-weight-bold" %>
+                    <%= link_to "Your Trips", your_trips_path, class: "text-dark font-weight-bold" %>
                 </div>
+            </div>
+            <div class="text-center mt-3">
+                <%= link_to "Back", :back %>
             </div>
         </div>
         <div class="col-9">
