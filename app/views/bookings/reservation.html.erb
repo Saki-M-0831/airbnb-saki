@@ -29,31 +29,31 @@
                     <% if @bookings.nil? %>
                         <p class="text-muted">No Accommodations Are Booked</p>
                     <% else %>
-                        <% @bookings.each do |book| %>
+                        <% @bookings.each do |booking| %>
                             <div class="row mx-3">
                                 <div class="col-3 my-auto">
-                                    <h5><%=link_to book.accommodation.name, accommodation_path(book.accommodation) %></h5>
-                                    <span class="font-weight-bold">Checkin Date: </span><br><%= book.check_in %><br>
-                                    <span class="font-weight-bold">Checkout Date: </span><br><%= book.check_out %>
+                                    <h5><%=link_to booking.accommodation.name, accommodation_path(booking.accommodation) %></h5>
+                                    <span class="font-weight-bold">Checkin Date: </span><br><%= booking.check_in %><br>
+                                    <span class="font-weight-bold">Checkout Date: </span><br><%= booking.check_out %>
                                 </div>
                                 <div class="col-3 my-auto">
-                                    <%= image_tag book.accommodation.photos.first.image, class: "w-100" %>
+                                    <%= image_tag booking.accommodation.photos.first.image, class: "w-100" %>
                                 </div>
                                 <div class="col-3 my-auto">
                                     <span class="font-weight-bold">Customer: </span><br>
-                                    <% if !book.user.image.nil? %>
-                                        <%= image_tag book.user.image, class: "rounded-circle", :size => "30x30" %>
+                                    <% if !booking.user.image.nil? %>
+                                        <%= image_tag booking.user.image, class: "rounded-circle", :size => "30x30" %>
                                     <% else %>
                                         <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle", :size => "30x30" %>
                                     <% end %>
-                                    <%= link_to book.accommodation.user.name, root_path, class: "text-dark" %>
+                                    <%= link_to booking.accommodation.user.name, root_path, class: "text-dark" %>
                                 </div>
                                 <div class="col-3 my-auto">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop_<%= booking.id %>">
                                         Review Customer
                                     </button>
 
-                                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade" id="staticBackdrop_<%= booking.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -62,11 +62,18 @@
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                                <%= form_for :review do |f| %>
+                                                <%= form_for @review do |f| %>
                                                     <div class="modal-body">
-                                                        <%=  %>
+                                                        <div class="text-center mb-4 mt-3" id="stars_<%= booking.id %>"></div>
+                                                        <script>
+                                                            $('#stars_<%= booking.id %>').raty({
+                                                                path: 'assets',
+                                                                scoreName: 'review[rating]',
+                                                                score: 1
+                                                            });
+                                                        </script>
                                                         <%= f.text_area :comment, class: "form-control", placeholder: "Leave some comments here!" %>
-                                                        <%= f.hidden_field :booking_id, value: book.id %>
+                                                        <%= f.hidden_field :booking_id, value: booking.id %>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <%= f.submit "Add Review", class: "mx-auto btn btn-primary" %>

@@ -9,16 +9,18 @@ class BookingsController < ApplicationController
     else
       flash[:danger] = "You failed booking, please try again..."
     end
-    redirect_back(fallback_location: request.referer)
+    redirect_to your_trips_url
   end
 
   def reservation
     ids = Accommodation.where(user_id: current_user.id).pluck(:id)
-    @bookings = Booking.where(accommodation_id: ids )
+    @bookings = Booking.where(accommodation_id: ids)
+    @review = Review.new
   end
 
   def trip
     @bookings = current_user.bookings
+    @review = Review.new
   end
 
   private
