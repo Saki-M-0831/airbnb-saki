@@ -98,24 +98,24 @@
             <% current_user.host_reviews.each do |h| %>
                 <div class="row">
                     <div class="col-2 my-auto">
-                        <% if !g.user.image.nil? %>
-                            <%= image_tag g.user.image, class: "rounded-circle w-50" %>
+                        <% if !h.user.image.nil? %>
+                            <%= image_tag h.user.image, class: "rounded-circle w-50" %>
                         <% else %>
                             <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle w-50" %>
                         <% end %><br>
-                        <%= g.user.name %>
+                        <%= h.user.name %>
                     </div>
                     <div class="col-10">
-                        <div id="star_<%= g.id %>"></div>
+                        <div id="stars_<%= h.id %>"></div>
                         <script>
-                            $('#stars_<%= g.id %>').raty({
+                            $('#stars_<%= h.id %>').raty({
                                 path: '/assets',
-                                score: '<%= g.rating %>',
+                                score: '<%= h.rating %>',
                                 readOnly: true
                             });
                         </script>
-                        Checkin date: <span class="text-muted"><%= g.booking.check_in %></span><br>
-                        <i class="fa fa-comments"></i> <span class="text-muted"><%= g.comment %></span>
+                        Checkin date: <span class="text-muted"><%= h.booking.check_in %></span><br>
+                        <i class="fa fa-comments"></i> <span class="text-muted"><%= h.comment %></span>
                     </div>
                     <hr>
                 </div>
