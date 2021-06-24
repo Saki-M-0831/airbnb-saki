@@ -22,5 +22,16 @@ class User < ApplicationRecord
         user.skip_confirmation!
       end
     end
-  end     
+  end   
+  
+  def guest_reviews
+    ids = accommodations.pluck(:id)
+    book_ids = Booking.where(accommodation_id: ids).pluck(:id)
+    @guest_reviews = Review.where(booking_id: book_ids) - reviews.where(booking_id: book_ids)
+  end
+
+  def host_reviews
+    trip_ids = bookings.pluck(:id)
+    @host_reviews = Review.where(booking_id: trip_ids) - reviews.where(booking_id: trip_ids)
+  end
 end
