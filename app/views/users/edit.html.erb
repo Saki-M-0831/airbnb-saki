@@ -1,0 +1,19 @@
+<section class="container">
+    <div class="row mt-3">
+        <div class="col-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4 class="my-0">Profile</h4>
+                </div>
+                <div class="card-body">
+                    <%= link_to "Edit Basic Info", edit_user_path(current_user), class: "btn nav-bg btn-block" %>
+                    <%= link_to "Show Detailed Profile", user_path, class: "btn btn-outline-dark btn-block" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card text-center">
+            </div>
+        </div>
+    </div>
+</section>

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  resources :users, only: [:show, :edit, :update]
+
   resources :accommodations do
     resources :photos, only: [:create, :destroy]
     member do
