@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :accommodations, dependent: :destroy
   has_many :bookings, dependent: :destroy
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, through: :bookings, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,5 +22,17 @@ class User < ApplicationRecord
         user.skip_confirmation!
       end
     end
-  end     
+  end   
+  
+  def guest_reviews
+    ids = accommodations.pluck(:id)
+    @bookings = Booking.where(accommodation_id: ids)
+    book_ids = @bookings.pluck(:id)
+    @guest_reviews = Review.where(booking_id: book_ids) - reviews.where(booking_id: book_ids)
+  end
+
+  def host_reviews
+    trip_ids = bookings.pluck(:id)
+    @host_reviews = Review.where(booking_id: trip_ids) - reviews.where(booking_id: trip_ids)
+  end
 end

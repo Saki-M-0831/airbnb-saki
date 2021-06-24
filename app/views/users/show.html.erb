@@ -67,8 +67,8 @@
                 <% end %>
             </div>
             <hr>
-            <h5 class="my-1">Reviews From Guests (<%= @guest_reviews.count %>)</h5>
-            <% @guest_reviews.each do |g| %>
+            <h5 class="my-1">Reviews From Guests (<%= current_user.guest_reviews.count %>)</h5>
+            <% current_user.guest_reviews.each do |g| %>
                 <div class="row">
                     <div class="col-2 my-auto">
                         <% if !g.user.image.nil? %>
@@ -94,8 +94,8 @@
                 </div>
             <% end %>
             <hr>
-            <h5 class="my-1">Reviews From Hosts (<%= @host_reviews.count %>)</h5>
-            <% @host_reviews.each do |h| %>
+            <h5 class="my-1">Reviews From Hosts (<%= current_user.host_reviews.count %>)</h5>
+            <% current_user.host_reviews.each do |h| %>
                 <div class="row">
                     <div class="col-2 my-auto">
                         <% if !g.user.image.nil? %>

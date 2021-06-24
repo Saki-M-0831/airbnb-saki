@@ -32,7 +32,7 @@
                         <%= link_to "Your Reservations", your_reservations_path, class: "dropdown-item" %>
                         <%= link_to "Your Trips", your_trips_path, class: "dropdown-item" %>
                         <div class="dropdown-divider"></div>
-                        <%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %>
+                        <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: "dropdown-item" %>
                         <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
                     </div>
                 </li>

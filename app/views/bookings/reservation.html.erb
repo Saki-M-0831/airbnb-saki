@@ -46,7 +46,7 @@
                                     <% else %>
                                         <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle", :size => "30x30" %>
                                     <% end %>
-                                    <%= link_to booking.accommodation.user.name, root_path, class: "text-dark" %>
+                                    <%= link_to booking.user.name, root_path, class: "text-dark" %>
                                 </div>
                                 <div class="col-3 my-auto">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop_<%= booking.id %>">
