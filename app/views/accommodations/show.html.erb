@@ -8,14 +8,14 @@
                     <i class="fa fa-map-pin"></i> <%= @accommodation.location %>
                 </div>
                 <div class="col-3 text-center">
-                    <%= link_to root_path do %>
+                    <%= link_to user_path(@accommodation.user) do %>
                         <% if @accommodation.user.image? %>
                             <%= image_tag @accommodation.user.image, :size => "80x80" %>
                         <% else %>
                             <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", :size => "80x80" %>
                         <% end %>
                     <% end %><br>
-                    <%= link_to @accommodation.user.name, root_path, class:"text-dark" %>
+                    <%= link_to @accommodation.user.name, user_path(@accommodation.user), class:"text-dark" %>
                 </div>
             </div>
             <hr>
