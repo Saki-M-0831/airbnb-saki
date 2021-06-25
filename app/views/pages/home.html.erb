@@ -2,18 +2,18 @@
     <div class="row home-bg mx-5 mt-3 mb-5">
         <div class="col-6 mx-auto py-5 my-5">
             <h2 class="text-white">Experience Any Place Like a Local</h2>
-            <%= form_for :search do |f| %>
-                <%= f.text_field :destination, placeholder: "Where are you going?", class: "form-control text-center" %>
+            <%= form_tag search_path, method: :get do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Where are you going?", class: "form-control text-center" %>
 
                 <div class="row mt-2">
                     <div class="col-6">
-                        <%= f.text_field :check_in, id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
+                        <%= text_field_tag :check_in, params[:check_in], id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
                     </div>
                     <div class="col-6">
-                        <%= f.text_field :check_out, id: "check_out", placeholder: "Check Out", class: "form-control text-center", readonly: true, disabled: true %>
+                        <%= text_field_tag :check_out, params[:check_out], id: "check_out", placeholder: "Check Out", class: "form-control text-center", readonly: true, disabled: true %>
                     </div>
                 </div>
-                <%= f.submit "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
+                <%= submit_tag "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
             <% end %>
             <script>
                 $(function(){
