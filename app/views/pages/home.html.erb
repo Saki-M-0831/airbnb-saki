@@ -7,14 +7,35 @@
 
                 <div class="row mt-2">
                     <div class="col-6">
-                        <%= f.text_field :checkin_date, placeholder: "Check In", class: "form-control text-center" %>
+                        <%= f.text_field :check_in, id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
                     </div>
                     <div class="col-6">
-                        <%= f.text_field :checkout_date, placeholder: "Check Out", class: "form-control text-center" %>
+                        <%= f.text_field :check_out, id: "check_out", placeholder: "Check Out", class: "form-control text-center", readonly: true, disabled: true %>
                     </div>
                 </div>
                 <%= f.submit "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
             <% end %>
+            <script>
+                $(function(){
+                    $("#check_in").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_out").datepicker("option", "minDate", selected);
+                            $("#check_out").attr("disabled", false);
+                        }
+                    })
+                    $("#check_out").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_in").datepicker("option", "maxDate", selected);
+                        }
+                    })
+                });
+            </script>
         </div>
     </div>   
 </section>
