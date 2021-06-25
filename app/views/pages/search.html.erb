@@ -1,0 +1,184 @@
+<section class="container mb-4">
+    <a class="btn btn-outline-dark nav-bg px-5" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        More Filters
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body mt-4">
+            <%= form_for :search do |f| %>
+                <div class="row mx-5">
+                    <div class="col-6">
+                        Price Range<br>
+                        <div id="slider-range" class="mt-2 mx-5"></div>
+                    </div>
+                    <div class="col-3">
+                        Min Price:<br>
+                        <%= f.text_field :min_price, id: "amountMin", class: "form-control text-center" %>
+                    </div>
+                    <div class="col-3">
+                        Max Price:<br>
+                        <%= f.text_field :max_price, id: "amountMax", class: "form-control text-center" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5">
+                    <div class="col-6">
+                        <%= f.text_field :check_in, id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
+                    </div>
+                    <div class="col-6">
+                        <%= f.text_field :check_in, id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5 pt-2">
+                    <div class="col-4">
+                        <%= f.check_box :Apartment %>
+                        <%= f.label :Apartment, "Apartment" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :House %>
+                        <%= f.label :House, "House" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :BedBreakfast %>
+                        <%= f.label :BedBreakfast, "Bed & Breakfast" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5 pt-2">
+                    <div class="col-4">
+                        <%= f.check_box :Entire %>
+                        <%= f.label :Entire, "Entire Room" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :Private %>
+                        <%= f.label :Private, "Private" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :Shared %>
+                        <%= f.label :Shared, "Shared" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5 pb-2">
+                    <div class="col-4">
+                        <%= f.label :accommodate, "Guests" %>
+                        <%= f.select :accommodate, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.label :bedroom_count, "Bedrooms" %>
+                        <%= f.select :bedroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.label :bathroom_count, "Bathrooms" %>
+                        <%= f.select :bathroom_count, {'1': 1, '2': 2, '3': 3, '4+': 4}, { include_blank: 'Select...'}, class: "form-control" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5 pt-2">
+                    <div class="col-4">
+                        <%= f.check_box :has_tv %>
+                        <%= f.label :has_tv, "TV" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :has_kitchen %>
+                        <%= f.label :has_kitchen, "Kitchen" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :has_internet %>
+                        <%= f.label :has_internet, "Internet Connection" %>
+                    </div>
+                </div>
+                <div class="row mx-5">
+                    <div class="col-4">
+                        <%= f.check_box :has_heating %>
+                        <%= f.label :has_heating, "Heating" %>
+                    </div>
+                    <div class="col-4">
+                        <%= f.check_box :has_ac %>
+                        <%= f.label :has_ac, "Air Conditioner" %>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mx-5">
+                    <%= submit_tag "Search", class: "btn btn-outline-primary ml-auto px-5" %>
+                </div>
+            <% end %>
+            <script>
+                $(function(){
+                    $("#check_in").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_out").datepicker("option", "minDate", selected);
+                            $("#check_out").attr("disabled", false);
+                        }
+                    })
+                    $("#check_out").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_in").datepicker("option", "maxDate", selected);
+                        }
+                    })
+                });
+            </script>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+                $(function() {
+                    $( "#slider-range" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 1000,
+                    values: [ 0, 1000 ],
+                    slide: function( event, ui ) {
+                        $( "#amountMin" ).val( ui.values[ 0 ] );
+                        $( "#amountMax" ).val( ui.values[ 1 ] );
+                    }
+                    });
+                    $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+                    $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
+                });
+            </script>
+        </div>
+    </div>
+</section>
+<section class="container mb-5">
+    <h2>Accommodations</h2>
+    <hr>
+    <div class="row">
+        <% @accommodations.each do |accommo| %>
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <%= link_to accommodation_path(accommo), class:"hover" do %>
+                            <% if accommo.photos.any? %>
+                                <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-l" %>
+                            <% else %>
+                                <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-l" %>
+                            <% end %>
+                        <% end %><br>
+                        <h5 class="my-2"><%= link_to accommo.name, accommodation_path(accommo), class: "text-dark" %></h5>
+                        <p class="text-muted mb-0">
+                            $ <%= accommo.price %> - <%= accommo.home_type %><br>
+                            <%= accommo.bedroom_count %> Bedrooms<br>
+                            <div id="stars_<%= accommo.id %>"></div>
+                            <script>
+                                $('#stars_<%= accommo.id %>').raty({
+                                    path: '/assets',
+                                    score: '<%= accommo.average_rating %>',
+                                    readOnly: true
+                                });
+                            </script>
+                            <% ids = accommo.bookings.pluck(:id) %>
+                            <%= Review.where(booking_id: ids).count %> Reviews
+                        </p>
+                    </div>
+                </div> 
+            </div>
+        <% end %>
+    </div>
+    <div class="text-center mx-auto mt-4"><%= will_paginate @accommodations %></div>
+</section>
