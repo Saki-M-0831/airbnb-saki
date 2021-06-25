@@ -7,14 +7,35 @@
 
                 <div class="row mt-2">
                     <div class="col-6">
-                        <%= f.text_field :checkin_date, placeholder: "Check In", class: "form-control text-center" %>
+                        <%= f.text_field :check_in, id: "check_in", placeholder: "Check In", class: "form-control text-center", readonly: true %>
                     </div>
                     <div class="col-6">
-                        <%= f.text_field :checkout_date, placeholder: "Check Out", class: "form-control text-center" %>
+                        <%= f.text_field :check_out, id: "check_out", placeholder: "Check Out", class: "form-control text-center", readonly: true, disabled: true %>
                     </div>
                 </div>
                 <%= f.submit "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
             <% end %>
+            <script>
+                $(function(){
+                    $("#check_in").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_out").datepicker("option", "minDate", selected);
+                            $("#check_out").attr("disabled", false);
+                        }
+                    })
+                    $("#check_out").datepicker({
+                        dateFormat: 'dd-mm-yy',
+                        minDate: 0,
+                        maxDate: '3m',
+                        onSelect: function(selected){
+                            $("#check_in").datepicker("option", "maxDate", selected);
+                        }
+                    })
+                });
+            </script>
         </div>
     </div>   
 </section>
@@ -22,28 +43,38 @@
     <h2>Accommodations</h2>
     <hr>
     <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <%= link_to root_path, class:"hover" do %>
-                        <%= image_tag "https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287__480.jpg", class: "w-100 text-center" %>
-                    <% end %><br>
-                    <h4 class="my-2"><%= link_to "Incredible Place", root_path, class: "text-dark" %></h4>
-                    <p class="text-muted mb-0">
-                        $ 600<br>
-                        House<br>
-                        5 Bedrooms<br>
-                        <i class="fa fa-heart"></i>
-                        <i class="fa fa-heart"></i>
-                        <i class="fa fa-heart"></i>
-                        <i class="fa fa-heart"></i>
-                        <i class="fa fa-heart"></i><br>
-                        0 Reviews
-                    </p>
-                </div>
+        <% @accommodations.each do |accommo| %>
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <%= link_to accommodation_path(accommo), class:"hover" do %>
+                            <% if accommo.photos.any? %>
+                                <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-l" %>
+                            <% else %>
+                                <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-l" %>
+                            <% end %>
+                        <% end %><br>
+                        <h5 class="my-2"><%= link_to accommo.name, accommodation_path(accommo), class: "text-dark" %></h5>
+                        <p class="text-muted mb-0">
+                            $ <%= accommo.price %> - <%= accommo.home_type %><br>
+                            <%= accommo.bedroom_count %> Bedrooms<br>
+                            <div id="stars_<%= accommo.id %>"></div>
+                            <script>
+                                $('#stars_<%= accommo.id %>').raty({
+                                    path: '/assets',
+                                    score: '<%= accommo.average_rating %>',
+                                    readOnly: true
+                                });
+                            </script>
+                            <% ids = accommo.bookings.pluck(:id) %>
+                            <%= Review.where(booking_id: ids).count %> Reviews
+                        </p>
+                    </div>
+                </div> 
             </div>
-        </div>
+        <% end %>
     </div>
+    <div class="text-center mx-auto mt-4"><%= will_paginate @accommodations %></div>
 </section>
 <section class="container">
     <h2>Cities</h2>
