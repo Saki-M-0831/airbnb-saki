@@ -1,5 +1,5 @@
 <section class="container mb-4">
-    <a class="btn btn-outline-dark nav-bg" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-outline-dark nav-bg px-5" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         More Filters
     </a>
     <div class="collapse" id="collapseExample">
@@ -7,15 +7,16 @@
             <%= form_for :search do |f| %>
                 <div class="row mx-5">
                     <div class="col-6">
-                        Price Range
+                        Price Range<br>
+                        <div id="slider-range" class="mt-2 mx-5"></div>
                     </div>
                     <div class="col-3">
                         Min Price:<br>
-                        <%= f.text_field :min_price, class: "form-control text-center" %>
+                        <%= f.text_field :min_price, id: "amountMin", class: "form-control text-center" %>
                     </div>
                     <div class="col-3">
                         Max Price:<br>
-                        <%= f.text_field :max_price, class: "form-control text-center" %>
+                        <%= f.text_field :max_price, id: "amountMax", class: "form-control text-center" %>
                     </div>
                 </div>
                 <hr>
@@ -99,7 +100,7 @@
                 </div>
                 <hr>
                 <div class="row mx-5">
-                    <%= submit_tag "Search", class: "btn btn-outline-primary ml-auto px-3 mt-2" %>
+                    <%= submit_tag "Search", class: "btn btn-outline-primary ml-auto px-5" %>
                 </div>
             <% end %>
             <script>
@@ -121,6 +122,24 @@
                             $("#check_in").datepicker("option", "maxDate", selected);
                         }
                     })
+                });
+            </script>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+                $(function() {
+                    $( "#slider-range" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 1000,
+                    values: [ 0, 1000 ],
+                    slide: function( event, ui ) {
+                        $( "#amountMin" ).val( ui.values[ 0 ] );
+                        $( "#amountMax" ).val( ui.values[ 1 ] );
+                    }
+                    });
+                    $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+                    $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
                 });
             </script>
         </div>
