@@ -38,14 +38,14 @@
                                     <% if accommo.is_active == true %>
                                         <small class="badge badge-pill nav-bg col-5 float-left mb-1">Published</small>
                                         <%= link_to accommodation_path(accommo) do %>
-                                            <%= image_tag accommo.photos.first.image, class: "w-100 hover" %>
+                                            <%= image_tag accommo.photos.first.image, class: "w-100 hover pic-size-s" %>
                                         <% end %>
                                     <% else %>
                                         <small class="badge badge-pill badge-secondary col-5 float-left mb-1 ">Creating</small>
                                         <% if accommo.photos.any? %>
-                                            <%= image_tag accommo.photos.first.image, class: "w-100 pic-size" %>
+                                            <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-s" %>
                                         <% else %>
-                                            <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size" %>
+                                            <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-s" %>
                                         <% end %>
                                     <% end %>
                                     
@@ -63,7 +63,7 @@
                                     <% end %>
                                 </div>
                                 <div class="col-3 text-center my-auto">
-                                    <%= link_to "Update", listing_accommodation_path(accommo), class: "btn btn-outline-success px-4" %>
+                                    <%= link_to "Update", listing_accommodation_path(accommo), class: "btn btn-outline-primary px-4" %>
                                 </div>
                             </div>
                             <hr>

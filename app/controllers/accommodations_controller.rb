@@ -50,6 +50,9 @@ class AccommodationsController < ApplicationController
   def show
     @photos = @accommodation.photos
     @booking = Booking.new
+    ids = @accommodation.bookings.pluck(:id)
+    guests = @accommodation.bookings.pluck(:user_id)
+    @g_reviews = Review.where(booking_id: ids, user_id: guests).paginate(page: params[:page], per_page: 4)
   end
 
   def preload

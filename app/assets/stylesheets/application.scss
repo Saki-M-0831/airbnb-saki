@@ -73,8 +73,22 @@
   height: 400px;
 }
 
+#map-search{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .pic-size{
   height: 130px;
+}
+
+.pic-size-s{
+  height: 100px;
+}
+
+.pic-size-m{
+  height: 180px;
 }
 
 .pic-size-l{
