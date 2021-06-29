@@ -44,7 +44,7 @@
                                     <% if !booking.user.image.nil? %>
                                         <%= image_tag booking.user.image, class: "rounded-circle", :size => "30x30" %>
                                     <% else %>
-                                        <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle", :size => "30x30" %>
+                                        <%= image_tag gravatar_for(booking.user), class: "rounded-circle", :size => "30x30" %>
                                     <% end %>
                                     <%= link_to booking.user.name, user_path(booking.user), class: "text-dark" %>
                                 </div>

@@ -21,6 +21,7 @@
                         <%= render "shared/devise_messages", resource: resource %>
 
                         <div class="field">
+                            <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "form-control my-3" %>
                             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control my-3" %>
                             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-3" %>
                             <%= f.text_field :phone, autofocus: true, autocomplete: "phone", class: "form-control mb-3", placeholder: "Phone Number (without hyphen)" %>
