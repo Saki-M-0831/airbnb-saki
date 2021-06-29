@@ -15,27 +15,6 @@
                 </div>
                 <%= submit_tag "Search", class: "btn btn-outline-primary mx-auto text-white px-3 mt-2" %>
             <% end %>
-            <script>
-                $(function(){
-                    $("#check_in").datepicker({
-                        dateFormat: 'dd-mm-yy',
-                        minDate: 0,
-                        maxDate: '3m',
-                        onSelect: function(selected){
-                            $("#check_out").datepicker("option", "minDate", selected);
-                            $("#check_out").attr("disabled", false);
-                        }
-                    })
-                    $("#check_out").datepicker({
-                        dateFormat: 'dd-mm-yy',
-                        minDate: 0,
-                        maxDate: '3m',
-                        onSelect: function(selected){
-                            $("#check_in").datepicker("option", "maxDate", selected);
-                        }
-                    })
-                });
-            </script>
         </div>
     </div>   
 </section>
@@ -59,9 +38,9 @@
                         <p class="text-muted mb-0">
                             $ <%= accommo.price %> - <%= accommo.home_type %><br>
                             <%= accommo.bedroom_count %> Bedrooms<br>
-                            <div id="stars_<%= accommo.id %>"></div>
+                            <div id="h_stars_<%= accommo.id %>"></div>
                             <script>
-                                $('#stars_<%= accommo.id %>').raty({
+                                $('#h_stars_<%= accommo.id %>').raty({
                                     path: '/assets',
                                     score: '<%= accommo.average_rating %>',
                                     readOnly: true
@@ -105,3 +84,24 @@
 </section>
 <br>
 <br>
+<script>
+    $(function(){
+        $("#check_in").datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: 0,
+            maxDate: '3m',
+            onSelect: function(selected){
+                $("#check_out").datepicker("option", "minDate", selected);
+                $("#check_out").attr("disabled", false);
+            }
+        })
+        $("#check_out").datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: 0,
+            maxDate: '3m',
+            onSelect: function(selected){
+                $("#check_in").datepicker("option", "maxDate", selected);
+            }
+        })
+    });
+</script>

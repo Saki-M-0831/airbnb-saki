@@ -103,83 +103,119 @@
                     <%= submit_tag "Search", class: "btn btn-outline-primary ml-auto px-5" %>
                 </div>
             <% end %>
-            <script>
-                $(function(){
-                    $("#check_in").datepicker({
-                        dateFormat: 'dd-mm-yy',
-                        minDate: 0,
-                        maxDate: '3m',
-                        onSelect: function(selected){
-                            $("#check_out").datepicker("option", "minDate", selected);
-                            $("#check_out").attr("disabled", false);
-                        }
-                    })
-                    $("#check_out").datepicker({
-                        dateFormat: 'dd-mm-yy',
-                        minDate: 0,
-                        maxDate: '3m',
-                        onSelect: function(selected){
-                            $("#check_in").datepicker("option", "maxDate", selected);
-                        }
-                    })
-                });
-            </script>
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-            <script>
-                $(function() {
-                    $( "#slider-range" ).slider({
-                    range: true,
-                    min: 0,
-                    max: 1000,
-                    values: [ 0, 1000 ],
-                    slide: function( event, ui ) {
-                        $( "#amountMin" ).val( ui.values[ 0 ] );
-                        $( "#amountMax" ).val( ui.values[ 1 ] );
-                    }
-                    });
-                    $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
-                    $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
-                });
-            </script>
         </div>
     </div>
 </section>
 <section class="container mb-5">
-    <h2>Accommodations</h2>
-    <hr>
     <div class="row">
-        <% @accommodations_arr.each do |accommo| %>
-            <div class="col-4 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <%= link_to accommodation_path(accommo), class:"hover" do %>
-                            <% if accommo.photos.any? %>
-                                <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-m" %>
-                            <% else %>
-                                <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-l" %>
-                            <% end %>
-                        <% end %><br>
-                        <h5 class="my-2 mb-0"><%= link_to accommo.name, accommodation_path(accommo), class: "text-dark" %></h5>
-                        <i class="fa fa-map-pin"></i> <%= accommo.location %><br>
-                        <p class="text-muted mb-0">
-                            $ <%= accommo.price %> - <%= accommo.home_type %><br>
-                            <%= accommo.bedroom_count %> Bedrooms<br>   
-                            <div id="stars_<%= accommo.id %>"></div>
-                            <script>
-                                $('#stars_<%= accommo.id %>').raty({
-                                    path: '/assets',
-                                    score: '<%= accommo.average_rating %>',
-                                    readOnly: true
-                                });
-                            </script>
-                            <% ids = accommo.bookings.pluck(:id) %>
-                            <%= Review.where(booking_id: ids).count %> Reviews
-                        </p>
+        <div class="col-8">
+            <h2>Accommodations</h2>
+            <hr>
+            <div class="row">
+                <% @accommodations_arr.each do |accommo| %>
+                    <div class="col-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <%= link_to accommodation_path(accommo), class:"hover" do %>
+                                    <% if accommo.photos.any? %>
+                                        <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-m" %>
+                                    <% else %>
+                                        <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-l" %>
+                                    <% end %>
+                                <% end %><br>
+                                <h5 class="my-2 mb-0"><%= link_to accommo.name, accommodation_path(accommo), class: "text-dark" %></h5>
+                                <i class="fa fa-map-pin"></i> <%= accommo.location %><br>
+                                <p class="text-muted mb-0">
+                                    $ <%= accommo.price %> - <%= accommo.home_type %><br>
+                                    <%= accommo.bedroom_count %> Bedrooms<br>   
+                                    <div id="s_stars_<%= accommo.id %>"></div>
+                                    <script>
+                                        $('#s_stars_<%= accommo.id %>').raty({
+                                            path: '/assets',
+                                            score: '<%= accommo.average_rating %>',
+                                            readOnly: true
+                                        });
+                                    </script>
+                                    <% ids = accommo.bookings.pluck(:id) %>
+                                    <%= Review.where(booking_id: ids).count %> Reviews
+                                </p>
+                            </div>
+                        </div> 
                     </div>
-                </div> 
-            </div>
-        <% end %>
-    </div>
-    
+                <% end %>
+            </div>   
+        </div>
+        <div class="col-4">
+            <br><br>
+            <div id="map-search"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ljqecHowghf4-EaCSIRBNeWk4Iv4bZ4"></script>
+            <script>
+                function initialize() {
+                    var location = {lat: 44.5403, lng: -78.5463};
+                    <% if @accommodations_arr.length > 0 %>
+                        location = {lat: Number("<%= @accommodations_arr[0].latitude %>"), lng: Number("<%= @accommodations_arr[0].longitude %>")};
+                    <% end %>
+                    var map = new google.maps.Map(document.getElementById('map-search'),{
+                        center: location,
+                        zoom: 5
+                    });
+
+                    var marker, infoWindow;
+                    <% @accommodations_arr.each do |accommo| %>
+                        marker = new google.maps.Marker({
+                            position: {lat: Number("<%= accommo.latitude %>"), lng: Number("<%= accommo.longitude %>")},
+                            map: map
+                        });
+
+                        infoWindow = new google.maps.InfoWindow({
+                            content: "<div>$" + <%= accommo.price %> + "</div>"
+                        });
+                    <% end %>
+
+                    infoWindow.open(map, marker);
+                }
+
+                google.maps.event.addDomListener(window,'load', initialize);
+            </script>
+        </div>
+    </div>   
 </section>
+<script>
+    $(function(){
+        $("#check_in").datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: 0,
+            maxDate: '3m',
+            onSelect: function(selected){
+                $("#check_out").datepicker("option", "minDate", selected);
+                $("#check_out").attr("disabled", false);
+            }
+        })
+        $("#check_out").datepicker({
+            dateFormat: 'dd-mm-yy',
+            minDate: 0,
+            maxDate: '3m',
+            onSelect: function(selected){
+                $("#check_in").datepicker("option", "maxDate", selected);
+            }
+        })
+    });
+</script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 1000,
+        values: [ 0, 1000 ],
+        slide: function( event, ui ) {
+            $( "#amountMin" ).val( ui.values[ 0 ] );
+            $( "#amountMax" ).val( ui.values[ 1 ] );
+        }
+        });
+        $( "#amountMin" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+        $( "#amountMax" ).val( $( "#slider-range" ).slider( "values", 1 ) );
+    });
+</script>
