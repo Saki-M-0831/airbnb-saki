@@ -1,5 +1,5 @@
 class AccommodationsController < ApplicationController
-  before_action :require_login
+  skip_before_action :require_login, only: [:index, :show]
   before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update, :show, :preload, :preview]
 
   def new
@@ -48,7 +48,6 @@ class AccommodationsController < ApplicationController
   end
 
   def show
-
     @photos = @accommodation.photos
     @booking = Booking.new
     ids = @accommodation.bookings.pluck(:id)
