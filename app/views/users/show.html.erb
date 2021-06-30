@@ -2,10 +2,10 @@
     <div class="row mt-3">
         <div class="col-3">
             <div class="card text-center">
-                <% if !current_user.image.nil? %>
-                    <%= image_tag current_user.image, class: "card-img-top" %>
+                <% if current_user.image? %>
+                    <%= image_tag current_user.image.url, class: "card-img-top", :size => "150x300" %>
                 <% else %>
-                    <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "card-img-top" %>
+                    <%= image_tag gravatar_for(current_user), class: "card-img-top", :size => "150x300" %>
                 <% end %>
                 <div class="card-header">
                     <h5>Verification</h5>
@@ -32,6 +32,7 @@
         </div>
         <div class="col-9">
             <h3><%= current_user.name %></h3>
+            <p><i class="fa fa-info-circle"></i> <%= current_user.description %></p>
             <hr>
             <h5>Rooms (<%= @accommodations.count %>)</h5>
             <div class="row"> 
@@ -71,12 +72,12 @@
             <% current_user.guest_reviews.each do |g| %>
                 <div class="row">
                     <div class="col-2 my-auto">
-                        <% if !g.user.image.nil? %>
-                            <%= image_tag g.user.image, class: "rounded-circle w-50" %>
+                        <% if g.user.image? %>
+                            <%= image_tag g.user.image, class: "rounded-circle", :size => "50x50" %>
                         <% else %>
-                            <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle w-50" %>
+                            <%= image_tag gravatar_for(g.user), class: "rounded-circle", :size => "50x50" %>
                         <% end %><br>
-                        <%= g.user.name %>
+                        <%= link_to g.user.name, user_path(g.user), class: "text-dark" %>
                     </div>
                     <div class="col-10">
                         <div id="stars_<%= g.id %>"></div>
@@ -98,12 +99,12 @@
             <% current_user.host_reviews.each do |h| %>
                 <div class="row">
                     <div class="col-2 my-auto">
-                        <% if !h.user.image.nil? %>
-                            <%= image_tag h.user.image, class: "rounded-circle w-50" %>
+                        <% if h.user.image? %>
+                            <%= image_tag h.user.image, class: "rounded-circle", :size => "30x30" %>
                         <% else %>
-                            <%= image_tag "https://cdn.pixabay.com/photo/2015/12/22/04/00/photo-1103597__480.png", class: "rounded-circle w-50" %>
+                            <%= image_tag gravatar_for(h.user), class: "rounded-circle", :size => "30x30" %>
                         <% end %><br>
-                        <%= h.user.name %>
+                        <%= link_to h.user.name, user_path(h.user), class: "text-dark" %>
                     </div>
                     <div class="col-10">
                         <div id="stars_<%= h.id %>"></div>
