@@ -41,8 +41,8 @@
                                 </div>
                                 <div class="col-3 my-auto">
                                     <span class="font-weight-bold">Customer: </span><br>
-                                    <% if !booking.user.image.nil? %>
-                                        <%= image_tag booking.user.image, class: "rounded-circle", :size => "30x30" %>
+                                    <% if booking.user.image? %>
+                                        <%= image_tag booking.user.image.url, class: "rounded-circle", :size => "30x30" %>
                                     <% else %>
                                         <%= image_tag gravatar_for(booking.user), class: "rounded-circle", :size => "30x30" %>
                                     <% end %>

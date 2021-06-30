@@ -48,6 +48,7 @@ class AccommodationsController < ApplicationController
   end
 
   def show
+
     @photos = @accommodation.photos
     @booking = Booking.new
     ids = @accommodation.bookings.pluck(:id)

@@ -10,7 +10,7 @@
                 <div class="col-3 text-center">
                     <%= link_to user_path(@accommodation.user) do %>
                         <% if @accommodation.user.image? %>
-                            <%= image_tag @accommodation.user.image, :size => "80x80" %>
+                            <%= image_tag @accommodation.user.image.url, :size => "80x80" %>
                         <% else %>
                             <%= image_tag gravatar_for(@accommodation.user), :size => "80x80" %>
                         <% end %>
@@ -75,10 +75,10 @@
                 <% @g_reviews.each do |g| %>
                     <div class="row mx-5">
                         <div class="col-3 my-auto mx-auto">
-                            <% if !g.user.image.nil? %>
-                                <%= image_tag g.user.image, class: "rounded-circle w-50" %>
+                            <% if g.user.image? %>
+                                <%= image_tag g.user.image.url, class: "rounded-circle", :size => "50x50" %>
                             <% else %>
-                                <%= image_tag gravatar_for(g.user), class: "rounded-circle w-50" %>
+                                <%= image_tag gravatar_for(g.user), class: "rounded-circle", :size => "50x50" %>
                             <% end %><br>
                             <%= link_to g.user.name, user_path(g.user), class: "text-dark" %>
                         </div>

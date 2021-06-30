@@ -19,8 +19,8 @@
             <% if user_signed_in? %>
                 <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <% if !current_user.image.nil? %>
-                            <%= image_tag current_user.image, class: "rounded-circle", :size => "30x30" %>
+                        <% if current_user.image? %>
+                            <%= image_tag current_user.image.url, class: "rounded-circle", :size => "30x30" %>
                         <% else %>
                             <%= image_tag gravatar_for(current_user), class: "rounded-circle", :size => "30x30" %>
                         <% end %>
