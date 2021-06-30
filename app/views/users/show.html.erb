@@ -3,9 +3,9 @@
         <div class="col-3">
             <div class="card text-center">
                 <% if current_user.image? %>
-                    <%= image_tag current_user.image.url, class: "card-img-top", :size => "150x300" %>
+                    <%= image_tag current_user.image.url, class: "card-img-top w-100" %>
                 <% else %>
-                    <%= image_tag gravatar_for(current_user), class: "card-img-top", :size => "150x300" %>
+                    <%= image_tag gravatar_for(current_user), class: "card-img-top w-100" %>
                 <% end %>
                 <div class="card-header">
                     <h5>Verification</h5>
