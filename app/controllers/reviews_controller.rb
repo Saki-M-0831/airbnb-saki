@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
 
   def already_exist
     @booking = Booking.find(review_params[:booking_id])
-    unless @booking.reviews.where(user_id: current_user.id).nil?
+    if @booking.reviews.where(user_id: current_user.id).any?
       flash[:alert] = "You have reviewed this reservation already"
 
       redirect_back(fallback_location: request.referer)
