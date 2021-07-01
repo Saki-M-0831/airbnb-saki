@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:succuess] = "You succuessfully added the review!! Thank you!"
     else
-      flash[:danger] = "You failed to add review, please try again..."
+      flash[:alert] = "You failed to add review, please try again..."
     end
     
     redirect_back(fallback_location: request.referer)
@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
   def already_exist
     @booking = Booking.find(review_params[:booking_id])
     unless @booking.reviews.where(user_id: current_user.id).nil?
-      flash[:danger] = "You have reviewed this reservation already"
+      flash[:alert] = "You have reviewed this reservation already"
 
       redirect_back(fallback_location: request.referer)
     end

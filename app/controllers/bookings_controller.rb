@@ -9,7 +9,7 @@ class BookingsController < ApplicationController
 
       flash[:success] = "You have successfully booked this accommodation!!"
     else
-      flash[:danger] = "You failed booking, please try again..."
+      flash[:alert] = "You failed booking, please try again..."
     end
     redirect_to your_trips_url  
   end
@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
     @accommodation = Accommodation.find(book_params[:accommodation_id])
     if @accommodation.user == current_user
 
-      redirect_back(fallback_location: request.referer, danger: "You cannot book your own accommodation...")
+      redirect_back(fallback_location: request.referer, alert: "You cannot book your own accommodation...")
     end
   end 
 end
