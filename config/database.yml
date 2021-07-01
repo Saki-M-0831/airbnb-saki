@@ -50,6 +50,9 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: airbnb_saki_production
   username: airbnb_saki
   password: <%= ENV['AIRBNB_SAKI_DATABASE_PASSWORD'] %>
