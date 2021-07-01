@@ -1,15 +1,17 @@
 class BookingsController < ApplicationController
+  before_action :book_available, only: [:create]
+
   def create
     @booking = current_user.bookings.new(book_params)
+
     if @booking.save
       @booking.update(total_price: @booking.accommodation.price * (@booking.check_out - @booking.check_in))
-
 
       flash[:success] = "You have successfully booked this accommodation!!"
     else
       flash[:danger] = "You failed booking, please try again..."
     end
-    redirect_to your_trips_url
+    redirect_to your_trips_url  
   end
 
   def reservation
@@ -27,4 +29,12 @@ class BookingsController < ApplicationController
   def book_params
     params.require(:booking).permit(:check_in, :check_out, :accommodation_id)
   end
+
+  def book_available
+    @accommodation = Accommodation.find(book_params[:accommodation_id])
+    if @accommodation.user == current_user
+
+      redirect_back(fallback_location: request.referer, danger: "You cannot book your own accommodation...")
+    end
+  end 
 end

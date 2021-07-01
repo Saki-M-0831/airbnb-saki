@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :already_exist, only: [:create]
+
   def create
     @review = current_user.reviews.new(review_params)
     if @review.save
@@ -10,8 +12,25 @@ class ReviewsController < ApplicationController
     redirect_back(fallback_location: request.referer)
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    flash[:success] = "You have successfully deleted the review"
+
+    redirect_back(fallback_location: request.referer)
+  end
+
   private
   def review_params
     params.require(:review).permit(:booking_id, :rating, :comment)
+  end
+
+  def already_exist
+    @booking = Booking.find(review_params[:booking_id])
+    unless @booking.reviews.where(user_id: current_user.id).nil?
+      flash[:danger] = "You have reviewed this reservation already"
+
+      redirect_back(fallback_location: request.referer)
+    end
   end
 end

@@ -1,5 +1,5 @@
 class AccommodationsController < ApplicationController
-  skip_before_action :require_login, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:show]
   before_action :init_accommo, only: [:listing, :price, :description, :photos, :amenities, :locations, :update, :show, :preload, :preview]
 
   def new
@@ -53,6 +53,8 @@ class AccommodationsController < ApplicationController
     ids = @accommodation.bookings.pluck(:id)
     guests = @accommodation.bookings.pluck(:user_id)
     @g_reviews = Review.where(booking_id: ids, user_id: guests).paginate(page: params[:page], per_page: 4)
+
+    @nearbys = @accommodation.nearbys(10).paginate(page: params[:page], per_page: 2)
   end
 
   def preload

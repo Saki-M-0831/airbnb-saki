@@ -153,7 +153,41 @@
             </script>
             <hr>
             <h3>Places Nearby</h3>
-            <p>No places near by...</p>
+            <% if !@nearbys.nil? %>
+                <% for accommo in @nearbys %>
+                    <div class="col-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <%= link_to accommodation_path(accommo), class:"hover" do %>
+                                    <% if accommo.photos.any? %>
+                                        <%= image_tag accommo.photos.first.image, class: "w-100 pic-size-m" %>
+                                    <% else %>
+                                        <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 pic-size-m" %>
+                                    <% end %>
+                                <% end %><br>
+                                <h5 class="my-2 mb-0"><%= link_to accommo.name, accommodation_path(accommo), class: "text-dark" %></h5>
+                                <i class="fa fa-map-pin"></i> <%= accommo.location %><br>
+                                (<%= accommo.distance.round(2) %> kms away)
+                                <p class="text-muted mb-0">
+                                    $ <%= accommo.price %> - <%= accommo.home_type %><br>
+                                    <div id="h_stars_<%= accommo.id %>"></div>
+                                    <script>
+                                        $('#h_stars_<%= accommo.id %>').raty({
+                                            path: '/assets',
+                                            score: '<%= accommo.average_rating %>',
+                                            readOnly: true
+                                        });
+                                    </script>
+                                    <% ids = accommo.bookings.pluck(:id) %>
+                                    <%= Review.where(booking_id: ids).count %> Reviews
+                                </p>
+                            </div>
+                        </div> 
+                    </div> 
+                <% end %>
+            <% else %>
+                <p>No places near by...</p>
+            <% end %>
         </div>
         <div class="col-4">
             <div class="card">

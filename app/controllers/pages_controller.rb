@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :require_login
+  skip_before_action :authenticate_user!
 
   def home
     @accommodations = Accommodation.where(is_active: true).paginate(page: params[:page], per_page: 6)
