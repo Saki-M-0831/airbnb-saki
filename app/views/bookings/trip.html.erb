@@ -49,12 +49,15 @@
                                     <%= link_to booking.accommodation.user.name, user_path(booking.accommodation.user), class: "text-dark" %>
                                 </div>
                                 <div class="col-3 my-auto">
-                                    <% unless booking.reviews.where(user_id: current_user.id).nil? %>
-                                        <small class="badge badge-pill nav-bg col-6 float-left mb-1">Reviewed</small>    
+                                    <% if booking.reviews.where(user_id: current_user.id).any? %>
+                                        <small class="badge badge-pill nav-bg col-6 float-left mb-1">Reviewed</small> 
+                                        <% @d_review = booking.reviews.find_by(user_id: current_user.id) %>
+                                        <%= button_to "Delete Review", review_path(@d_review), method: :delete, class: "btn btn-outline-danger" %>  
+                                    <% else %>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop_<%= booking.id %>">
+                                            Review Customer
+                                        </button>
                                     <% end %>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop_<%= booking.id %>">
-                                        Review Host
-                                    </button>
 
                                     <div class="modal fade" id="staticBackdrop_<%= booking.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
