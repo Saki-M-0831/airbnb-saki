@@ -49,6 +49,9 @@
                                     <%= link_to booking.accommodation.user.name, user_path(booking.accommodation.user), class: "text-dark" %>
                                 </div>
                                 <div class="col-3 my-auto">
+                                    <% unless booking.reviews.where(user_id: current_user.id).nil? %>
+                                        <small class="badge badge-pill nav-bg col-6 float-left mb-1">Reviewed</small>    
+                                    <% end %>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop_<%= booking.id %>">
                                         Review Host
                                     </button>

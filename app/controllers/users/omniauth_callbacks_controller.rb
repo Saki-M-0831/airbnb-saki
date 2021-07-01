@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   def failure
-    flash[:danger] = "Cannot login using facebook"
+    flash[:alert] = "Cannot login using facebook"
     redirect_to root_path
   end 
 end
