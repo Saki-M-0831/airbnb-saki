@@ -54,31 +54,47 @@
             </div>
         <% end %>
     </div>
-    <div class="text-center mx-auto mt-4"><%= will_paginate @accommodations %></div>
+    <div class="col-5 text-center mx-auto mt-4"><%= will_paginate @accommodations %></div>
 </section>
 <section class="container">
     <h2>Cities</h2>
     <hr>
     <div class="row text-center">
-        <div class="col-3 paris-bg py-5 hover">
-            <br><br><br><br>
-            <h3><%= link_to "Paris", root_path, class: "text-white p-5" %></h3>
-            <br><br><br><br>
+        <div class="col-3 paris-bg py-5 hover position-relative">
+            <br><br><br>
+            <h3 class="pt-4 cities">Paris</h3>
+            <%= form_tag search_path, method: :get do %>
+                <%= hidden_field_tag :search, params[:search], value:"Paris" %>
+                <h3><%= submit_tag "Paris", class: "p-5 trans" %></h3>
+            <% end %>
+            <br>
         </div>
-        <div class="col-3 amsterdam-bg py-5 hover">
-            <br><br><br><br>
-            <h3><%= link_to "Amsterdam", root_path, class: "text-white p-5" %></h3>
-            <br><br><br><br>
+        <div class="col-3 amsterdam-bg py-5 hover position-relative">
+            <br><br><br>
+            <h3 class="pt-4 cities">Amsterdam</h3>
+            <%= form_tag search_path, method: :get do %>
+                <%= hidden_field_tag :search, params[:search], value:"Amsterdam" %>
+                <h3><%= submit_tag "Amsterdam", class: "p-5 trans" %></h3>
+            <% end %>
+            <br>
         </div>
-        <div class="col-3 chicago-bg py-5 hover">
-            <br><br><br><br>
-            <h3><%= link_to "Chicago", root_path, class: "text-white p-5" %></h3>
-            <br><br><br><br>
+        <div class="col-3 chicago-bg py-5 hover position-relative">
+            <br><br><br>
+            <h3 class="pt-4 cities">Chicago</h3>
+            <%= form_tag search_path, method: :get do %>
+                <%= hidden_field_tag :search, params[:search], value:"Chicago" %>
+                <h3><%= submit_tag "Chicago", class: "p-5 trans" %></h3>
+            <% end %>
+            <br>
         </div>
-        <div class="col-3 tokyo-bg py-5 hover">
-            <br><br><br><br>
-            <h3><%= link_to "Tokyo", root_path, class: "text-white p-5" %></h3>
-            <br><br><br><br>
+        <div class="col-3 tokyo-bg py-5 hover position-relative">
+            <br><br><br>
+            <h3 class="pt-4 cities">Tokyo</h3>
+            <%= form_tag search_path, method: :get do %>
+                <%= hidden_field_tag :search, params[:search], value:"Tokyo" %>
+                <h3><%= submit_tag "Tokyo", class: "p-5 trans" %></h3>
+            <% end %>
+            <br>
         </div>
     </div>
 </section>
