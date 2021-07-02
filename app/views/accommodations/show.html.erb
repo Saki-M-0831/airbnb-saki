@@ -1,6 +1,10 @@
 <section class="container">
     <div class="row">
-        <%= image_tag @accommodation.photos.first.image, class: "w-100 mb-3" %>
+        <% if @accommodation.photos.any? %>
+            <%= image_tag @accommodation.photos.first.image, class: "w-100 mb-3" %>
+        <% else %>
+            <%= image_tag "https://cdn.pixabay.com/photo/2017/10/19/17/56/camera-2868620__340.png", class: "w-100 mb-3" %>
+        <% end %>
         <div class="col-8">
             <div class="row">
                 <div class="col-9">
@@ -103,28 +107,32 @@
                 </div>
             <% end %>
             <hr>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <% @accommodation.photos.each do |photo|%>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="<%= photo.id %>"></li>
-                    <% end %>
-                </ol>
-                <div class="carousel-inner">
-                    <% @photos.each do |photo| %>
-                        <div class="carousel-item <%= photo.id == @accommodation.photos.first.id ? 'active' : '' %>">
-                            <%= image_tag photo.image, class: "d-block w-100" %>
-                        </div>
-                    <% end %>
+            <% if @accommodation.photos.any? %>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <% @accommodation.photos.each do |photo|%>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="<%= photo.id %>"></li>
+                        <% end %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <% @photos.each do |photo| %>
+                            <div class="carousel-item <%= photo.id == @accommodation.photos.first.id ? 'active' : '' %>">
+                                <%= image_tag photo.image, class: "d-block w-100" %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            <% else %>
+                <p class="text-muted">There is no photos of this accommodation</p>
+            <% end %>
             <hr>
             <div id="map"></div>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1ljqecHowghf4-EaCSIRBNeWk4Iv4bZ4"></script>
@@ -183,6 +191,7 @@
                                 </p>
                             </div>
                         </div> 
+                        <div class="col-5 text-center mx-auto mt-4"><% will_paginate @nearbys_p %></div>
                     </div> 
                 <% end %>
             <% else %>

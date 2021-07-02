@@ -54,7 +54,10 @@ class AccommodationsController < ApplicationController
     guests = @accommodation.bookings.pluck(:user_id)
     @g_reviews = Review.where(booking_id: ids, user_id: guests).paginate(page: params[:page], per_page: 4)
 
-    @nearbys = @accommodation.nearbys(10).paginate(page: params[:page], per_page: 2)
+    @nearbys = @accommodation.nearbys(10)
+    if !@nearbys.nil?
+      @nearbys_p = @nearbys.paginate(page: params[:page], per_page: 2)
+    end 
   end
 
   def preload
